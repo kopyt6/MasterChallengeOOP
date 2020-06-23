@@ -1,6 +1,6 @@
-package com.company;
+package com.kopytDev;
 
-public class Hamburger extends Burgers {
+public class Hamburger extends Burger {
 
     public Hamburger(String breadRollType) {
         super(breadRollType);
