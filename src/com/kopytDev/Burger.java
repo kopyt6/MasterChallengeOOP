@@ -3,7 +3,7 @@ package com.company;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public abstract class Burgers {
+public abstract class Burger {
     private static LinkedHashMap<String, Double> availableAdditions = new LinkedHashMap<>();
     private LinkedHashMap<String, Double> pickedAdditions = new LinkedHashMap<>();
     private String breadRollType;
@@ -18,7 +18,7 @@ public abstract class Burgers {
         this.breadRollType = breadRollType;
         this.meat = "Beef";
         this.maxAdditions = 4;
-        basePrice = 8;
+        this.basePrice = 8;
         this.finalPrice = basePrice;
 
         String[] items = {"lettuce", "tomato", "cucumber", "corn", "peas", "onion rings", "gherkins", "onions"};
