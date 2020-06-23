@@ -72,14 +72,9 @@ public abstract class Burger {
             System.out.println("No additions picked.");
         } else {
             for (Map.Entry<String, Double> stringDoubleEntry : pickedAdditions.entrySet()) {
-                try {
                     String setKey = stringDoubleEntry.getKey();
                     double setValue = stringDoubleEntry.getValue();
                     System.out.println(setKey + " : " + setValue);
-
-                } catch (NullPointerException e) {
-                    System.out.printf("Line %d caused an error check input.", e.getStackTrace()[0].getLineNumber());
-                }
             }
         }
     }
