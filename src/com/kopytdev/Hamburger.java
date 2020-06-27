@@ -1,4 +1,4 @@
-package com.kopytDev;
+package com.kopytdev;
 
 public class Hamburger extends Burger {
 

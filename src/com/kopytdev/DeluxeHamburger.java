@@ -1,4 +1,4 @@
-package com.kopytDev;
+package com.kopytdev;
 
 import java.util.LinkedHashMap;
 

@@ -1,4 +1,4 @@
-package com.kopytDev;
+package com.kopytdev;
 
 import org.jetbrains.annotations.NotNull;
 

@@ -1,4 +1,4 @@
-package com.kopytDev;
+package com.kopytdev;
 
 public class Test {
     public static void main(String[] args) {
