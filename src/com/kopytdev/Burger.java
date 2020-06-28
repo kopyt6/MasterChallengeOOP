@@ -1,4 +1,6 @@
-package com.company;
+package com.kopytdev;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -13,7 +15,7 @@ public abstract class Burger {
     private double finalPrice;
     private String name;
 
-    public Burgers(String breadRollType) {
+    public Burger(String breadRollType) {
         this.name = "Just a burger";
         this.breadRollType = breadRollType;
         this.meat = "Beef";
@@ -29,7 +31,7 @@ public abstract class Burger {
         }
     }
 
-    public Burgers(String breadRollType, double basePrice, String name, int maxAdditions) {
+    public Burger(String breadRollType, double basePrice, String name, int maxAdditions) {
         this(breadRollType);
         this.name = name;
         this.maxAdditions = maxAdditions;
@@ -45,28 +47,12 @@ public abstract class Burger {
         this.breadRollType = breadRollType;
     }
 
-    public double getBasePrice() {
-        return basePrice;
-    }
-
-    private void setBasePrice(double basePrice) {
-        this.basePrice = basePrice;
-    }
-
     public double getFinalPrice() {
         return finalPrice;
     }
 
-    private void setFinalPrice(double price) {
-        finalPrice += price;
-    }
-
     public String getName() {
         return name;
-    }
-
-    private void setName(String name) {
-        this.name = name;
     }
 
     public LinkedHashMap<String, Double> getAvailableAdditions() {
@@ -86,14 +72,9 @@ public abstract class Burger {
             System.out.println("No additions picked.");
         } else {
             for (Map.Entry<String, Double> stringDoubleEntry : pickedAdditions.entrySet()) {
-                try {
                     String setKey = stringDoubleEntry.getKey();
                     double setValue = stringDoubleEntry.getValue();
                     System.out.println(setKey + " : " + setValue);
-
-                } catch (NullPointerException e) {
-                    System.out.printf("Line %d caused an error check input.", e.getStackTrace()[0].getLineNumber());
-                }
             }
         }
     }
@@ -105,42 +86,38 @@ public abstract class Burger {
         System.out.println(". . . which totals at: " + finalPrice);
     }
 
-    public void pickAdditions(String... args) {
-        try {
-            if (args.length <= maxAdditions) {
-                for (String pickedItem : args) {
-                    if (availableAdditions.containsKey(pickedItem)) {
-                        pickedAdditions.put(pickedItem.toLowerCase(), availableAdditions.get(pickedItem.toLowerCase()));
-                        finalPrice += availableAdditions.get(pickedItem);
-                    } else {
-                        System.out.printf("Item \"%s\" not found.%n", pickedItem);
-                    }
+    public void pickAdditions(String @NotNull ... args) {
+        if (pickedAdditions.size() + args.length <= maxAdditions) {
+            for (String pickedItem : args) {
+                if (availableAdditions.containsKey(pickedItem)) {
+                    pickedAdditions.put(pickedItem.toLowerCase(), availableAdditions.get(pickedItem.toLowerCase()));
+                    finalPrice += availableAdditions.get(pickedItem);
+                } else {
+                    System.out.printf("Item \"%s\" not found.%n", pickedItem);
                 }
-            } else {
-                System.out.println("Too many items picked!");
             }
-        } catch (NullPointerException e) {
-            System.out.println("Line " + e.getStackTrace()[0].getLineNumber() + " caused an error, check input");
+        } else {
+            System.out.printf("Too many items picked, please remove %d item(s).%n",
+                    pickedAdditions.size() - args.length + maxAdditions);
         }
     }
 
-    public void removeAdditions(String... args) {
-        try {
-            for (String pickedItem : args) {
-                if (pickedAdditions.size() > 0) {
+    public void removeAdditions(String @NotNull ... args) {
+        if (pickedAdditions.size() > 0) {
+            if (pickedAdditions.size() - args.length >= 0) {
+                for (String pickedItem : args) {
                     if (availableAdditions.containsKey(pickedItem)) {
                         pickedAdditions.remove(pickedItem.toLowerCase(), availableAdditions.get(pickedItem.toLowerCase()));
                         finalPrice -= availableAdditions.get(pickedItem);
                     } else {
                         System.out.printf("Item \"%s\" not found.%n", pickedItem);
                     }
-                } else {
-                    System.out.println("Cannot remove an addition, since none are added.");
                 }
-
+            } else {
+                System.out.printf("Only %d addition(s) picked, cannot remove %d.%n", pickedAdditions.size(), args.length);
             }
-        } catch (NullPointerException e) {
-            System.out.println("Line " + e.getStackTrace()[0].getLineNumber() + " caused an error, check input");
+        } else {
+            System.out.println("Cannot remove any additions, since none are added.");
         }
     }
 }

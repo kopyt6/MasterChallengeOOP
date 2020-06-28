@@ -1,8 +1,8 @@
-package com.company;
+package com.kopytdev;
 
 import java.util.LinkedHashMap;
 
-public class DeluxeHamburger extends Burgers {
+public class DeluxeHamburger extends Burger {
     private LinkedHashMap<String, Double> availableAdditions;
     public DeluxeHamburger(String breadRollType, double basePrice) {
         super(breadRollType, basePrice, "Deluxe Hamburger", 2);

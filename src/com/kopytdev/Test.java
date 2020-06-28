@@ -1,7 +1,6 @@
-package com.company;
+package com.kopytdev;
 
-public class Main {
-
+public class Test {
     public static void main(String[] args) {
 
         Hamburger burger1 = new Hamburger("Brown");
@@ -23,11 +22,15 @@ public class Main {
         burger.pickAdditions("lettuce", "tomato", "onion rings");
         burger.printPickedAdditions();
 
-        burger.removeAdditions("onion rings", "lettuce", "chips", "tomato");
+        burger.removeAdditions("onion rings", "lettuce", "tomato");
         System.out.println("Picked additions: ");
         burger.printPickedAdditions();
+        System.out.println("*****************");
         burger.pickAdditions("gherkins");
         System.out.println("Picked additions: ");
+
+        burger.pickAdditions("cucumber", "peas", "onion rings", "lettuce");
+        burger.removeAdditions("cucumber", "peas");
         burger.printPickedAdditions();
     }
 }
